@@ -1,20 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import { unsplashAPI } from "./api/unsplashAPI.js";
-import SearchBar from "./components/SearchBar/SearchBar.jsx";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn.jsx";
-import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
-import Loader from "./components/Loader/Loader.jsx";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
-import ImageModal from "./components/ImageModal/ImageModal.jsx";
+import { unsplashAPI } from "./api/unsplashAPI.ts";
+import SearchBar from "./components/SearchBar/SearchBar.tsx";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn.tsx";
+import ImageGallery from "./components/ImageGallery/ImageGallery.tsx";
+import Loader from "./components/Loader/Loader.tsx";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage.tsx";
+import ImageModal from "./components/ImageModal/ImageModal.tsx";
+import { UnsplashPhoto } from "./api/unsplashAPI.ts";
 
-const App = () => {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(null);
+const App: React.FC = () => {
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<UnsplashPhoto[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [modalIsOpen, setIsOpen] = useState<UnsplashPhoto | null>(null);
 
   const setDataResp = useCallback(async () => {
     try {
@@ -35,21 +36,21 @@ const App = () => {
     }
   }, [query, page, setDataResp]);
 
-  const submitForm = (searchQuery) => {
+  const submitForm = (searchQuery: string) => {
     setQuery(searchQuery);
     setData([]);
     setPage(1);
   };
 
   const handleLoadMore = () => {
-    setPage(page + 1);
+    setPage((prevPage) => prevPage + 1);
   };
 
   const closeModal = () => {
     setIsOpen(null);
   };
 
-  const openModal = (data) => {
+  const openModal = (data: UnsplashPhoto) => {
     setIsOpen(data);
   };
 

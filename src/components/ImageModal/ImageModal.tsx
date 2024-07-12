@@ -1,14 +1,24 @@
+import { useEffect } from "react";
 import css from "./ImageModal.module.css";
-import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { AiFillLike } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
-import { useEffect } from "react";
+import { UnsplashPhoto } from "../../api/unsplashAPI";
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ isOpen, onRequestClose, item }) => {
+interface ImageModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  item?: UnsplashPhoto | null;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({
+  isOpen,
+  onRequestClose,
+  item,
+}) => {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no-scroll");
@@ -19,6 +29,7 @@ const ImageModal = ({ isOpen, onRequestClose, item }) => {
       document.body.classList.remove("no-scroll");
     };
   }, [isOpen]);
+
   return (
     <Modal
       className={css.modal}
@@ -49,21 +60,6 @@ const ImageModal = ({ isOpen, onRequestClose, item }) => {
       <p className={css.description}>{item?.alt_description}</p>
     </Modal>
   );
-};
-
-ImageModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  item: PropTypes.shape({
-    urls: PropTypes.shape({
-      regular: PropTypes.string.isRequired,
-    }).isRequired,
-    alt_description: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    likes: PropTypes.number.isRequired,
-  }),
 };
 
 export default ImageModal;

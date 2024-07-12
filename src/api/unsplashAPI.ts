@@ -4,10 +4,10 @@ axios.defaults.baseURL = "https://api.unsplash.com/";
 
 const ACCESS_KEY = "qz_oKJwZpo3COUV3FvPGVWR9rLo7Tof8kbJXhmvCS2U";
 
-interface UnsplashPhoto {
+export interface UnsplashPhoto {
   id: string;
   description: string | null;
-  alt_description: string | null;
+  alt_description: string | undefined;
   urls: {
     full: string;
     regular: string;
@@ -18,6 +18,7 @@ interface UnsplashPhoto {
     name: string;
     username: string;
   };
+  likes?: number;
 }
 
 interface UnsplashAPIResponse {
@@ -40,23 +41,3 @@ export const unsplashAPI = async (
   });
   return data.results;
 };
-
-// import axios from "axios";
-
-// axios.defaults.baseURL = "https://api.unsplash.com/";
-
-// const ACCESS_KEY = "qz_oKJwZpo3COUV3FvPGVWR9rLo7Tof8kbJXhmvCS2U";
-
-// export const unsplashAPI = async (searchQuery, page) => {
-//   const { data } = await axios.get("/search/photos", {
-//     params: {
-//       query: searchQuery,
-//       per_page: 12,
-//       page,
-//     },
-//     headers: {
-//       Authorization: `Client-ID ${ACCESS_KEY}`,
-//     },
-//   });
-//   return data.results;
-// };

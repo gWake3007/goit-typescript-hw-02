@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 import css from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
-  const [input, setInput] = useState("");
-  const handleSubmit = (e) => {
+type SearchBarProps = {
+  onSubmit: (query: string) => void;
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const [input, setInput] = useState<string>("");
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim() === "") {
-      toast.error("Please enter to search word!");
+      toast.error("Please enter a search word!");
+      return;
     }
     onSubmit(input.toLowerCase());
+    setInput("");
   };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
   return (
     <header className={css.header}>
       <form className={css.form} onSubmit={handleSubmit}>
@@ -23,7 +35,7 @@ const SearchBar = ({ onSubmit }) => {
           autoFocus
           value={input}
           placeholder="Search images and photos"
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleChange}
         />
         <button className={css.btn} type="submit">
           <PiMagnifyingGlassDuotone className={css.svg} />

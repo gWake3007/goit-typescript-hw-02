@@ -1,8 +1,13 @@
 import css from "./ImageGallery.module.css";
-import PropTypes from "prop-types";
 import ImageCard from "../ImageCard/ImageCard";
+import { UnsplashPhoto } from "../../api/unsplashAPI";
 
-const ImageGallery = ({ list, onImageClick }) => (
+interface ImageGalleryProps {
+  list: UnsplashPhoto[];
+  onImageClick: (item: UnsplashPhoto) => void;
+}
+
+const ImageGallery: React.FC<ImageGalleryProps> = ({ list, onImageClick }) => (
   <ul className={css.list}>
     {list.map((item) => (
       <li key={item.id}>
@@ -11,14 +16,5 @@ const ImageGallery = ({ list, onImageClick }) => (
     ))}
   </ul>
 );
-
-ImageGallery.propTypes = {
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onImageClick: PropTypes.func.isRequired,
-};
 
 export default ImageGallery;
