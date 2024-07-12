@@ -1,0 +1,44 @@
+.header {
+  background-color: gray;
+  min-width: 1374px;
+  padding: 20px 0px;
+  border: 1px solid darkgray;
+  border-radius: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  max-width: 410px;
+  margin: 0 auto;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+.input {
+  min-width: 370px;
+  height: 22px;
+  border: none;
+  outline: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.btn {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 22px;
+  width: 30px;
+}
+
+.svg {
+  color: black;
+}

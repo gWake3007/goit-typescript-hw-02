@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.loadMoreBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: gray;
+  border: 1px solid darkgrey;
+  border-radius: 7px;
+  color: white;
+  font-size: 20px;
+  line-height: 1.2;
+}
