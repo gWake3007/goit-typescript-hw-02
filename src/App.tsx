@@ -22,7 +22,7 @@ const App: React.FC = () => {
       setError(false);
       setLoading(true);
       const resp = await unsplashAPI(query, page);
-      setData((prev) => [...prev, ...resp]);
+      setData((prev) => [...prev, ...resp.results]);
     } catch (err) {
       setError(true);
     } finally {

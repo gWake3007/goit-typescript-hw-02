@@ -21,14 +21,16 @@ export interface UnsplashPhoto {
   likes?: number;
 }
 
-interface UnsplashAPIResponse {
+export interface UnsplashAPIResponse {
   results: UnsplashPhoto[];
+  total: number;
+  total_pages: number;
 }
 
 export const unsplashAPI = async (
   searchQuery: string,
   page: number
-): Promise<UnsplashPhoto[]> => {
+): Promise<UnsplashAPIResponse> => {
   const { data } = await axios.get<UnsplashAPIResponse>("/search/photos", {
     params: {
       query: searchQuery,
@@ -39,5 +41,5 @@ export const unsplashAPI = async (
       Authorization: `Client-ID ${ACCESS_KEY}`,
     },
   });
-  return data.results;
+  return data;
 };
