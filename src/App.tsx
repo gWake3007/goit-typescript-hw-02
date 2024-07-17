@@ -8,6 +8,7 @@ import Loader from "./components/Loader/Loader.tsx";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.tsx";
 import ImageModal from "./components/ImageModal/ImageModal.tsx";
 import { UnsplashPhoto } from "./api/unsplashAPI.ts";
+import { string } from "prop-types";
 
 const App: React.FC = () => {
   const [error, setError] = useState<boolean>(false);
